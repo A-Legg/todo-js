@@ -20,4 +20,15 @@ h1 {
 
 body {
     text-align: center;
+
+
+}
+
+ p {
+
+    background-color: lightgreen;
+    border-color: black;
+    width: 30%;
+    text-align: center;
+
 }

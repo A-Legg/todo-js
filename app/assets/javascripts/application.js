@@ -6,13 +6,19 @@
 $(document).ready(function() {
   $('body').append('<h1>Todoly</h1>');
 
-  $('h1').append("<form><input id='todo' type='text'> \
+  $('body').append("<form><input id='todo' type='text'> \
       <input type='submit'></form></div>");
 
 
 
-  var todo = document.getElementById("todo").value;
-  $('body').append("<li></li>");
-  console.log('todo')
+
+
+
+  $('form').on("submit", function(e) {
+      e.preventDefault();
+      var toDo = document.getElementById("todo").value;
+     $('body').append('<li>' + toDo + '</li>')
+
+  });
 
 });

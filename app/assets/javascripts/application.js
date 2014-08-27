@@ -1,66 +1,56 @@
-
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
 
-$(document).ready(function() {
+$(document).ready(function () {
   $('body').append('<h1>Todoly</h1>');
 
   $('body').append("<form><input id='todo' type='text'> \
-      <input type='submit' class='submit' value='Create Todo'></form></div>");
-
-  $('body').append('<p class="flash"></p>');
+      <input type='submit' class='submit' value='Create Todo '></form></div>");
 
 
+  $('body').append('<div class="todo"><h2>Todo!</h2></div>');
+
+  $('body').append('<div class="completed"><h2>Completed!</h2></div>');
 
 
-  $('form').on("submit", function(e) {
-      e.preventDefault();
-      var toDo = document.getElementById("todo").value;
-     $('body').append('<li>' + toDo + '</li>')
 
+  $('form').on("submit", function (e) {
+    e.preventDefault();
+    var toDo = document.getElementById("todo").value;
+    $('.todo').append('<h2 class="flash">' + toDo + '  Created' + '<span id="delete-flash">X </span>' + '</h2>');
+    $('.todo').append('<li>' + toDo + '<span id="complete">√</span>' +   '<span id="delete">X</span> ' + '</li>');
+
+    $('.flash').fadeOut(5000);
   });
 
 
-  (function($) {
-    $.fn.flash_message = function(options) {
+  $('body').on('click', '#delete', function (e) {
+    $(this).parent().remove();
 
-      options = $.extend({
-        text: 'Todo Created',
-        time: 5000,
-        how: 'before',
-        class_name: ''
-      }, options);
+  });
 
-      return $(this).each(function() {
-        if( $(this).parent().find('.flash_message').get(0) )
-          return;
+  $('body').on('click', '#complete', function (e) {
+    var toDone = $(this.parentElement);
+    debugger;
 
-        var message = $('<span />', {
-          'class': 'flash_message ' + options.class_name,
-          text: options.text
-        }).hide().fadeIn('fast');
+    $('.completed').append('<h2>   </h2>');
 
-        $(this)[options.how](message);
-
-        message.delay(options.time).fadeOut('normal', function() {
-          $(this).remove();
-        });
-
-      });
-    };
-  })(jQuery);
+    $('.completed').append(toDone);
 
 
+  });
 
-  $('.submit').click(function() {
-    $('body p').flash_message({
-      text: "Todo created",
-      how: 'append',
-      time: 5000,
-      color: 'green'
+  $('.todo').on('click', '#delete-flash', function (e) {
+    $(this).parent().remove();
+  });
 
-    })
-  })
 
 });
+
+
+
+
+
+
+
